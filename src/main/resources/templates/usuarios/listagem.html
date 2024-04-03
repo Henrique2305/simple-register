@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Lista de usuários</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <h1>Lista de usuários</h1>
+    <a href="/usuarios/formulario">Novo</a>
+    <table>
+        <thead>
+            <tr>
+                <th>NOME</th>
+                <th>DATA DE NASCIMENTO</th>
+                <th>E-MAIL</th>
+                <th>SENHA</th>
+                <th>AÇÕES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="usuario : ${lista}">
+                <td th:text="${usuario.nome}"><</td>
+                <td th:text="${usuario.dataNascimento}"><</td>
+                <td th:text="${usuario.email}"><</td>
+                <td th:text="${usuario.senha}"><</td>
+                <td>
+                    <a th:href="@{/usuarios/formulario?id={id}(id=${usuario.id})}">Editar</a>
+
+                    <form action="/usuarios" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="id" th:value="${usuario.id}">
+
+                        <input type="submit" value="EXCLUIR">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
