@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.stream.Collectors;
+
 @Service
 public class UsuarioService {
 
@@ -22,7 +27,33 @@ public class UsuarioService {
     }
 
     public void loadData(Model model) {
-        model.addAttribute("lista", repository.findAll());
+        model.addAttribute("lista",
+                repository.findAll().stream()
+                        .map(e -> {
+                            e.setDataNascimento(formatStringToDate(e.getDataNascimento()));
+                            return e;
+                        })
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private String formatStringToDate(String input) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String result = null;
+
+        try {
+            Date date = inputFormat.parse(input, new ParsePosition(0));
+            result =  outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (result == null) {
+            result = input;
+        }
+
+        return result;
     }
 
     public void save(DadosCadastroUsuario dados) {

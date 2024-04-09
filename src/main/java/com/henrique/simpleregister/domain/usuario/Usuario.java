@@ -43,6 +43,10 @@ public class Usuario {
         return senha;
     }
 
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
     public void atualizaDados(DadosAlteracaoUsuario dados) {
         this.nome = dados.nome();
         this.dataNascimento = dados.dataNascimento();
