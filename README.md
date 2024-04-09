@@ -3,7 +3,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/Henrique2305/simple-register)
 
 ## Descrição
-Simples projeto MVC para cadastro de usuários, utilizando a linguagem Java com o Spring Boot e o Thymeleaf para os templates e um banco relacional.
+Simples projeto MVC para cadastro de usuários, utilizando a linguagem Java com o Spring Boot e o Thymeleaf para os templates e um banco de dados relacional, o MySQL.
 
 ## ✔️ Tecnologias utilizadas
 
